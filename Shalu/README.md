@@ -70,3 +70,9 @@ Expected response format:
 - Verified endpoint behavior after merge:
   - Valid audio upload returns `200` with emotion
   - Missing file request returns `400` with validation error
+
+## Final Release Note
+The project is now in a stable, runnable state on `main` with:
+- documented setup and verification steps
+- trained model artifact and sample dataset structure
+- validated backend `/predict` behavior for both success and error cases
