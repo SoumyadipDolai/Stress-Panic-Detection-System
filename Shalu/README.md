@@ -23,6 +23,16 @@ Python, Flask, Scikit-learn, Librosa, HTML, CSS, JavaScript
 - `dataset_sample/` training audio organized by class
 - `model/` saved trained model (`svm_model.pkl`)
 
+### Directory Layout
+- `backend/app.py` API server with `/predict` endpoint
+- `backend/train_model.py` SVM training pipeline
+- `backend/utils/feature_extraction.py` audio feature extraction (MFCC, pitch, energy)
+- `frontend/index.html` main UI page
+- `frontend/css/style.css` UI styling
+- `frontend/js/script.js` voice recording + API call logic
+- `dataset_sample/calm|stressed|panic/*.wav` class-wise sample audio data
+- `model/svm_model.pkl` trained model artifact
+
 ## Setup and Run
 1. Install dependencies:
    `pip install -r requirements.txt`
@@ -48,3 +58,15 @@ Expected response format:
 ## Notes
 - The training script expects the dataset under `dataset_sample/` and saves the model to `model/svm_model.pkl`.
 - If `model/` is missing, create it before training.
+
+## Recent Changes
+- Added synthetic sample audio in `dataset_sample/` to make training runnable out of the box.
+- Trained and generated model artifact at `model/svm_model.pkl`.
+- Improved `backend/app.py` reliability:
+  - Stable model loading using absolute path resolution
+  - Input validation for missing/empty uploaded file
+  - Safe temporary file handling with cleanup
+  - Structured error responses (`400` for bad request, `500` for processing failure)
+- Verified endpoint behavior after merge:
+  - Valid audio upload returns `200` with emotion
+  - Missing file request returns `400` with validation error
